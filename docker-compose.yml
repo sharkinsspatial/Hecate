@@ -1,0 +1,12 @@
+version: '2'
+services:
+  hecate:
+    build: .
+    expose:
+      - 8000
+    depends_on:
+      - postgres
+  postgres:
+    build: ./postgres
+    ports:
+      - 5432:5432
