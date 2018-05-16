@@ -25,6 +25,7 @@
     - [Schema](#schema)
     - [Styles](#styles)
     - [Vector Tiles](#vector-tiles)
+    - [Cloning the Server](#downloading-clone)
     - [Downloading via Boundaries](#downloading-via-boundaries)
     - [Downloading Individual Features](#downloading-individual-features)
     - [Downloading Multiple Features via BBOX](#downloading-multiple-features-via-bbox)
@@ -357,9 +358,11 @@ have a map containing the auth for each subkey.
 | `GET /api/delta/<id>`                 | `delta::get`              | `public`      | All                       |       |
 | `GET /api/deltas`                     | `delta::list`             | `public`      | All                       |       |
 | **Features**                          | `feature`                 |               | `null`                    | 2     |
-| `POST /api/feature(s)`                | `feature::create`         | `user`        | `user`, `admin`, `null`   |       |
+| `POST /api/data/feature(s)`           | `feature::create`         | `user`        | `user`, `admin`, `null`   |       |
 | `GET /api/data/feature/<id>`          | `feature::get`            | `public`      | All                       |       |
 | `GET /api/data/feature/<id>/history`  | `feature::history`        | `public`      | All                       |       |
+| **Clone**                             | `clone`                   |               | `null`                    | 2     |
+| `GET /api/data/clone`                 | `clone::get`              | `user`        | All                       |       |
 | **Bounds**                            | `bounds`                  |               | `null`                    | 2     |
 | `GET /api/bounds`                     | `bounds::list`            | `public`      | All                       |       |
 | `GET /api/bounds/<id>`                | `bounds::get`             | `public`      | All                       |       |
@@ -684,6 +687,20 @@ curl -X GET 'http://username:password@localhost:8000/api/user/session
 
 ---
 
+<h3 align='center'>Downloading Clone</h3>
+
+#### `GET` `/api/data/clone`
+
+Return a Line-Delimited GeoJSON stream of all features currently stored on the server.
+
+*Example*
+
+```bash
+curl -X GET 'http://localhost:8000/api/data/clone
+```
+
+---
+
 <h3 align='center'>Downloading via Boundaries</h3>
 
 #### `GET` `/api/data/bounds/`
@@ -758,7 +775,7 @@ curl -X GET 'http://localhost:8000/api/data/feature/1542/history
 
 #### `GET` `/api/data/features`
 
-Return a `FeatureCollection` of all features within a given bbox
+Return streaming Line-Delimited GeoJSON within the provided BBOX
 
 *Options*
 
