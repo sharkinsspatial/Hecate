@@ -10,8 +10,7 @@ COPY ./Cargo.toml ./Cargo.toml
 
 # Builds your dependencies and removes the
 # fake source code from the dummy project
-#RUN cargo build --release
-RUN cargo build
+RUN cargo build --release
 RUN rm src/*.rs
 
 # Copies only your actual source code to
@@ -24,5 +23,4 @@ RUN cargo build --release
 #RUN cargo build
 
 # Configures the startup!
-CMD ['./target/release/hecate', '--database', 'hecate:password@postgres:5432/hecatedb']
-#CMD ['cargo', 'run', '--', '--database', 'hecate:password@postgres:5432/hecatedb']
+CMD ["./target/release/hecate", "--database", "hecate:password@postgres:5432/hecatedb"]
